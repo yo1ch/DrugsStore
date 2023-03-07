@@ -14,4 +14,9 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="ShapeableImage">
+        <item name="cornerSize">15%</item>
+    </style>
+
+
 </resources>
