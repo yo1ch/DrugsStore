@@ -1,12 +1,9 @@
 package com.vladimir_tsurko.drugsstore.domain
 
-import com.vladimir_tsurko.drugstore.data.remote.dto.authDto.AuthResponseDto
-import com.vladimir_tsurko.drugstore.data.remote.dto.productDto.ProductDto
-import com.vladimir_tsurko.drugstore.data.remote.dto.productDto.ProductListDto
-import com.vladimir_tsurko.drugstore.domain.models.LoginModel
-import com.vladimir_tsurko.drugstore.domain.models.RegistrationModel
-import com.vladimir_tsurko.drugstore.utils.Resource
-import retrofit2.Response
+import com.bumptech.glide.load.engine.Resource
+import com.vladimir_tsurko.drugsstore.data.remote.dto.authDto.AuthResponseDto
+import com.vladimir_tsurko.drugsstore.domain.models.RegistrationModel
+
 
 interface Repository {
 
