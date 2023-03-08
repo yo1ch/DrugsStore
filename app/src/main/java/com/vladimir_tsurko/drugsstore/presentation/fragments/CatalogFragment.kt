@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import com.vladimir_tsurko.drugsstore.App
 import com.vladimir_tsurko.drugsstore.databinding.FragmentCatalogBinding
 import com.vladimir_tsurko.drugsstore.presentation.adapters.ProductListAdapter

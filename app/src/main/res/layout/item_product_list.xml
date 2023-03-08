@@ -3,68 +3,65 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_margin="16dp"
-    android:layout_height="200dp"
+    android:layout_marginEnd="8dp"
+    android:layout_height="240dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="40dp"
+    app:cardCornerRadius="16dp"
     app:cardElevation="4dp"
+
     android:layout_marginBottom="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/teal_200"
-        android:padding="16dp">
+        android:layout_height="match_parent">
 
-
-        <com.google.android.material.imageview.ShapeableImageView
+        <ImageView
             android:id="@+id/imageView"
-            android:layout_width="140dp"
+            android:layout_width="0dp"
             android:layout_height="140dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/ShapeableImage"
-            tools:srcCompat="@tools:sample/avatars"
-            android:scaleType="centerCrop"/>
+            tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name"
+            android:layout_margin="8dp"
+            android:textColor="@color/black"
             android:textSize="16sp"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/specification"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <TextView
             android:id="@+id/specification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="8dp"
             android:text="Specification"
-            android:textSize="16sp"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/price"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/name" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Price"
+            android:layout_margin="8dp"
+            android:textColor="@color/black"
             android:textSize="16sp"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/specification" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
