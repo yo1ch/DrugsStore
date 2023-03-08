@@ -20,7 +20,7 @@ interface DrugstoreApi {
     suspend fun login(@Body loginDto: LoginDto): Response<AuthResponseDto>
 
     @GET("products")
-    suspend fun getAllProducts(@Header("Authorization") token: String): Response<List<ProductDto>>
+    suspend fun getAllProducts(): Response<List<ProductDto>>
 
 
 }

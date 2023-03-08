@@ -1,6 +1,7 @@
 package com.vladimir_tsurko.drugsstore.data
 
 import android.content.SharedPreferences
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.vladimir_tsurko.drugsstore.data.mappers.AuthMapper
@@ -50,26 +51,26 @@ class RepositoryImplementation @Inject constructor(
 
     override suspend fun getAllProducts(): Resource<List<ProductDto>> {
         val resultResponse: Resource<List<ProductDto>>
-        val token = prefs.getString("TOKEN","")
-        val resultToken = "Authorization: Bearer $token"
-        val response = drugstoreApi.getAllProducts(resultToken)
-        if(response.isSuccessful){
-            resultResponse = Resource.Success(response.body()!!)
+        val response = drugstoreApi.getAllProducts()
+        resultResponse = if(response.isSuccessful){
+            Resource.Success(response.body()!!)
         } else {
             val responseError = parseErrorBody(response.errorBody()!!)
-            resultResponse =  Resource.Error("${responseError?.details}")
+            Resource.Error("${responseError?.details}")
         }
         return resultResponse
     }
 
     override fun checkLoggedUser(): Boolean {
-        val getLogin = prefs.getString("USERNAME","")
-        val getPassword = prefs.getString("TOKEN","")
-        return getLogin != "" && getPassword != ""
+        val token = prefs.getString("TOKEN","")
+        val role = prefs.getString("ROLE","")
+        Log.d("Login", "$token $role")
+        return token != "" && role != ""
     }
 
-    fun saveLoggedUser(token: String, role: String){
-        prefs.edit().putString("USERNAME", token).putString("TOKEN", role).apply()
+    private fun saveLoggedUser(token: String, role: String){
+        prefs.edit().putString("TOKEN", token).putString("ROLE", role).apply()
+
     }
 
 
