@@ -1,7 +1,8 @@
-package com.vladimir_tsurko.drugstore.presentation.adapters
+package com.vladimir_tsurko.drugsstore.presentation.adapters
 
 import androidx.recyclerview.widget.RecyclerView
-import com.vladimir_tsurko.drugstore.databinding.ItemProductListBinding
+import com.vladimir_tsurko.drugsstore.databinding.ItemProductListBinding
+
 
 class ProductListViewHolder(
     val binding: ItemProductListBinding

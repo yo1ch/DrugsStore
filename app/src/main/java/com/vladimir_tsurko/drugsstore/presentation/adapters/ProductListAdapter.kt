@@ -1,11 +1,11 @@
-package com.vladimir_tsurko.drugstore.presentation.adapters
+package com.vladimir_tsurko.drugsstore.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
-import com.vladimir_tsurko.drugstore.data.remote.dto.productDto.ProductDto
-import com.vladimir_tsurko.drugstore.databinding.ItemProductListBinding
+import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.ProductDto
+import com.vladimir_tsurko.drugsstore.databinding.ItemProductListBinding
 
 class ProductListAdapter: ListAdapter<ProductDto, ProductListViewHolder>(CatalogDiffUtilCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductListViewHolder {

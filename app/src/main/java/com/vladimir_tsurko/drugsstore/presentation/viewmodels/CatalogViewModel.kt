@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vladimir_tsurko.drugstore.data.remote.dto.productDto.ProductDto
-import com.vladimir_tsurko.drugstore.domain.usecases.GetAllProductsUseCase
-import com.vladimir_tsurko.drugstore.utils.Resource
+import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.ProductDto
+import com.vladimir_tsurko.drugsstore.domain.usecases.GetAllProductsUseCase
+import com.vladimir_tsurko.drugsstore.utils.Resource
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vladimir_tsurko.drugstore.data.remote.dto.authDto.AuthResponseDto
-import com.vladimir_tsurko.drugstore.domain.models.LoginModel
-import com.vladimir_tsurko.drugstore.domain.models.RegistrationModel
-import com.vladimir_tsurko.drugstore.domain.usecases.CheckLoggedUserUseCase
-import com.vladimir_tsurko.drugstore.domain.usecases.LoginUseCase
-import com.vladimir_tsurko.drugstore.domain.usecases.RegistrationUseCase
-import com.vladimir_tsurko.drugstore.utils.Resource
+import com.vladimir_tsurko.drugsstore.data.remote.dto.authDto.AuthResponseDto
+import com.vladimir_tsurko.drugsstore.domain.models.LoginModel
+import com.vladimir_tsurko.drugsstore.domain.models.RegistrationModel
+import com.vladimir_tsurko.drugsstore.domain.usecases.CheckLoggedUserUseCase
+import com.vladimir_tsurko.drugsstore.domain.usecases.LoginUseCase
+import com.vladimir_tsurko.drugsstore.domain.usecases.RegistrationUseCase
+import com.vladimir_tsurko.drugsstore.utils.Resource
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

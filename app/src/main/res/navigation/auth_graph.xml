@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.vladimir_tsurko.drugstore.presentation.fragments.RegistrationFragment"
+        android:name="com.vladimir_tsurko.drugsstore.presentation.fragments.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" >
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.vladimir_tsurko.drugstore.presentation.fragments.LoginFragment"
+        android:name="com.vladimir_tsurko.drugsstore.presentation.fragments.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action

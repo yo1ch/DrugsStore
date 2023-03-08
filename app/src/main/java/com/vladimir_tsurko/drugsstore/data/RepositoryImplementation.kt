@@ -3,16 +3,16 @@ package com.vladimir_tsurko.drugsstore.data
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.vladimir_tsurko.drugstore.data.mappers.AuthMapper
-import com.vladimir_tsurko.drugstore.data.remote.DrugstoreApi
-import com.vladimir_tsurko.drugstore.data.remote.dto.ResponseError
-import com.vladimir_tsurko.drugstore.data.remote.dto.authDto.AuthResponseDto
-import com.vladimir_tsurko.drugstore.data.remote.dto.productDto.ProductDto
-import com.vladimir_tsurko.drugstore.data.remote.dto.productDto.ProductListDto
-import com.vladimir_tsurko.drugstore.domain.Repository
-import com.vladimir_tsurko.drugstore.domain.models.LoginModel
-import com.vladimir_tsurko.drugstore.domain.models.RegistrationModel
-import com.vladimir_tsurko.drugstore.utils.Resource
+import com.vladimir_tsurko.drugsstore.data.mappers.AuthMapper
+import com.vladimir_tsurko.drugsstore.data.remote.DrugstoreApi
+import com.vladimir_tsurko.drugsstore.data.remote.dto.ResponseError
+import com.vladimir_tsurko.drugsstore.data.remote.dto.authDto.AuthResponseDto
+import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.ProductDto
+import com.vladimir_tsurko.drugsstore.domain.Repository
+import com.vladimir_tsurko.drugsstore.domain.models.LoginModel
+import com.vladimir_tsurko.drugsstore.domain.models.RegistrationModel
+import com.vladimir_tsurko.drugsstore.utils.Resource
+
 import okhttp3.ResponseBody
 import javax.inject.Inject
 

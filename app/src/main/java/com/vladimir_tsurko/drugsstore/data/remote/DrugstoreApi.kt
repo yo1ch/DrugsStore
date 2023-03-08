@@ -1,10 +1,9 @@
 package com.vladimir_tsurko.drugsstore.data.remote
 
-import com.vladimir_tsurko.drugstore.data.remote.dto.authDto.RegistrationDto
-import com.vladimir_tsurko.drugstore.data.remote.dto.authDto.AuthResponseDto
-import com.vladimir_tsurko.drugstore.data.remote.dto.authDto.LoginDto
-import com.vladimir_tsurko.drugstore.data.remote.dto.productDto.ProductDto
-import com.vladimir_tsurko.drugstore.data.remote.dto.productDto.ProductListDto
+import com.vladimir_tsurko.drugsstore.data.remote.dto.authDto.AuthResponseDto
+import com.vladimir_tsurko.drugsstore.data.remote.dto.authDto.LoginDto
+import com.vladimir_tsurko.drugsstore.data.remote.dto.authDto.RegistrationDto
+import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.ProductDto
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

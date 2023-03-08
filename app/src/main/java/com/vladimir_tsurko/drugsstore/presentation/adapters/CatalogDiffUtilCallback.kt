@@ -1,7 +1,7 @@
-package com.vladimir_tsurko.drugstore.presentation.adapters
+package com.vladimir_tsurko.drugsstore.presentation.adapters
 
 import androidx.recyclerview.widget.DiffUtil
-import com.vladimir_tsurko.drugstore.data.remote.dto.productDto.ProductDto
+import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.ProductDto
 
 object CatalogDiffUtilCallback: DiffUtil.ItemCallback<ProductDto>() {
 

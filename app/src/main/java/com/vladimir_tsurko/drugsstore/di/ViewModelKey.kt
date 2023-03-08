@@ -1,4 +1,4 @@
-package com.vladimir_tsurko.drugstore.di
+package com.vladimir_tsurko.drugsstore.di
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

@@ -2,7 +2,7 @@ package com.vladimir_tsurko.drugsstore.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.vladimir_tsurko.drugstore.R
+import com.vladimir_tsurko.drugsstore.R
 
 
 class MainActivity : AppCompatActivity() {

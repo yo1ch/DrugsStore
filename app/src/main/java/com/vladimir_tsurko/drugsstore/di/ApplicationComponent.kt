@@ -1,9 +1,10 @@
 package com.vladimir_tsurko.drugsstore.di
 
+
 import android.app.Application
-import com.vladimir_tsurko.drugstore.presentation.fragments.CatalogFragment
-import com.vladimir_tsurko.drugstore.presentation.fragments.LoginFragment
-import com.vladimir_tsurko.drugstore.presentation.fragments.RegistrationFragment
+import com.vladimir_tsurko.drugsstore.presentation.fragments.CatalogFragment
+import com.vladimir_tsurko.drugsstore.presentation.fragments.LoginFragment
+import com.vladimir_tsurko.drugsstore.presentation.fragments.RegistrationFragment
 import dagger.BindsInstance
 import dagger.Component
 

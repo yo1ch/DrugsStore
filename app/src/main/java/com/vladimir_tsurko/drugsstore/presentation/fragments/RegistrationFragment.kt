@@ -9,10 +9,18 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.vladimir_tsurko.drugstore.R
+import com.vladimir_tsurko.drugsstore.App
+import com.vladimir_tsurko.drugsstore.R
+import com.vladimir_tsurko.drugsstore.databinding.FragmentRegistrationBinding
+import com.vladimir_tsurko.drugsstore.domain.models.RegistrationModel
+import com.vladimir_tsurko.drugsstore.presentation.viewmodels.AuthViewModel
+import com.vladimir_tsurko.drugsstore.presentation.viewmodels.ViewModelFactory
+import com.vladimir_tsurko.drugsstore.utils.Resource
+import javax.inject.Inject
 
 class RegistrationFragment : Fragment() {
 
+    @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
     private lateinit var viewModel: AuthViewModel

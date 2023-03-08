@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/catalogFragment"
-        android:name="com.vladimir_tsurko.drugstore.presentation.fragments.CatalogFragment"
+        android:name="com.vladimir_tsurko.drugsstore.presentation.fragments.CatalogFragment"
         android:label="fragment_catalog"
         tools:layout="@layout/fragment_catalog" />
 

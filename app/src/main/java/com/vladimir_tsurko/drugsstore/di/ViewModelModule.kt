@@ -1,8 +1,8 @@
-package com.vladimir_tsurko.drugstore.di
+package com.vladimir_tsurko.drugsstore.di
 
 import androidx.lifecycle.ViewModel
-import com.vladimir_tsurko.drugstore.presentation.viewmodels.AuthViewModel
-import com.vladimir_tsurko.drugstore.presentation.viewmodels.CatalogViewModel
+import com.vladimir_tsurko.drugsstore.presentation.viewmodels.AuthViewModel
+import com.vladimir_tsurko.drugsstore.presentation.viewmodels.CatalogViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

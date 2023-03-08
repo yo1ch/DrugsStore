@@ -9,13 +9,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.vladimir_tsurko.App
-import com.vladimir_tsurko.drugstore.R
-import com.vladimir_tsurko.drugstore.databinding.FragmentLoginBinding
-import com.vladimir_tsurko.drugstore.domain.models.LoginModel
-import com.vladimir_tsurko.drugstore.presentation.viewmodels.AuthViewModel
-import com.vladimir_tsurko.drugstore.presentation.viewmodels.ViewModelFactory
-import com.vladimir_tsurko.drugstore.utils.Resource
+import com.vladimir_tsurko.drugsstore.App
+import com.vladimir_tsurko.drugsstore.R
+import com.vladimir_tsurko.drugsstore.databinding.FragmentLoginBinding
+import com.vladimir_tsurko.drugsstore.domain.models.LoginModel
+import com.vladimir_tsurko.drugsstore.presentation.viewmodels.AuthViewModel
+import com.vladimir_tsurko.drugsstore.presentation.viewmodels.ViewModelFactory
+import com.vladimir_tsurko.drugsstore.utils.Resource
 import javax.inject.Inject
 
 
@@ -64,10 +64,12 @@ class LoginFragment : Fragment() {
         binding.button.setOnClickListener{
             val username = binding.username.text.toString()
             val password = binding.password.text.toString()
-            viewModel.login(LoginModel(
+            viewModel.login(
+                LoginModel(
                 username = username,
                 password = password,
-            ))
+            )
+            )
         }
     }
 

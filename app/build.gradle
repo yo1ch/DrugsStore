@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.vladimir_tsurko.drugstore'
+    namespace 'com.vladimir_tsurko.drugsstore'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.vladimir_tsurko.drugstore"
+        applicationId "com.vladimir_tsurko.drugsstore"
         minSdk 28
         targetSdk 33
         versionCode 1
@@ -61,6 +61,7 @@ dependencies {
     implementation 'com.google.dagger:dagger:2.45'
     kapt 'com.google.dagger:dagger-compiler:2.44'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.44'
+    kapt 'com.google.dagger:dagger-android-processor:2.15'
 
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
