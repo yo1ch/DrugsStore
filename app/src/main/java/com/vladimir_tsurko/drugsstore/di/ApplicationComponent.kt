@@ -4,6 +4,7 @@ package com.vladimir_tsurko.drugsstore.di
 import android.app.Application
 import com.vladimir_tsurko.drugsstore.presentation.fragments.CatalogFragment
 import com.vladimir_tsurko.drugsstore.presentation.fragments.LoginFragment
+import com.vladimir_tsurko.drugsstore.presentation.fragments.PurchaseFragment
 import com.vladimir_tsurko.drugsstore.presentation.fragments.RegistrationFragment
 import dagger.BindsInstance
 import dagger.Component
@@ -21,6 +22,8 @@ interface ApplicationComponent {
     fun inject(fragment: LoginFragment)
 
     fun inject(fragment: CatalogFragment)
+
+    fun inject(fragment: PurchaseFragment)
 
     @Component.Factory
     interface Factory{
