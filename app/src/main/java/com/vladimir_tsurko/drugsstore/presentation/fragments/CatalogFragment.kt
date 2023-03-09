@@ -48,7 +48,7 @@ class CatalogFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this, viewModelFactory)[CatalogViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity(), viewModelFactory)[CatalogViewModel::class.java]
         setupOnLogoutButtonClick()
         setupRecyclerView()
         setupCategories()
@@ -111,7 +111,7 @@ class CatalogFragment : Fragment() {
     private fun setupOnButtonClickListener(){
         adapter.onButtonClickListener = { view: View, product: ProductModel ->
             makeButtonClicked(view)
-            viewModel.addToCart(product)
+            viewModel.addToCart(product.id, product.name)
 
         }
     }
@@ -119,10 +119,6 @@ class CatalogFragment : Fragment() {
     private fun setupRecyclerView(){
         adapter = ProductListAdapter()
         binding.rvProductsList.adapter = adapter
-        val itemAnimator = binding.rvProductsList.itemAnimator
-        if(itemAnimator is DefaultItemAnimator){
-            itemAnimator.supportsChangeAnimations = false
-        }
         viewModel.productsResponse.observe(viewLifecycleOwner){
             when(it) {
                 is Resource.Success ->{

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vladimir_tsurko.drugsstore.domain.models.CategoryModel
 import com.vladimir_tsurko.drugsstore.domain.models.ProductModel
+import com.vladimir_tsurko.drugsstore.domain.models.PurchaseModel
 import com.vladimir_tsurko.drugsstore.domain.usecases.GetAllCategoriesUseCase
 import com.vladimir_tsurko.drugsstore.domain.usecases.GetAllProductsUseCase
 import com.vladimir_tsurko.drugsstore.domain.usecases.GetProductsByCategoryUseCase
@@ -31,9 +32,10 @@ class CatalogViewModel @Inject constructor(
     val categories: LiveData<Resource<List<CategoryModel>>?>
         get() = _categories
 
-    private var _cartProducts = MutableLiveData<MutableSet<ProductModel>?>()
-    val cartProducts: LiveData<MutableSet<ProductModel>?>
+    private var _cartProducts = MutableLiveData<MutableSet<PurchaseModel>?>()
+    val cartProducts: LiveData<MutableSet<PurchaseModel>?>
         get() = _cartProducts
+
 
     init {
         getAllCategories()
@@ -55,15 +57,26 @@ class CatalogViewModel @Inject constructor(
         }
     }
 
-    fun addToCart(product: ProductModel){
-        if(_cartProducts.value != null ){
+    fun addToCart(productId: Int, productName: String) {
+        if (_cartProducts.value != null) {
             val cartList = _cartProducts.value
-            cartList?.add(product)
+            cartList?.add(
+                PurchaseModel(
+                    id = productId,
+                    name = productName,
+                    count = 1,
+                )
+            )
             _cartProducts.value = cartList
-        } else{
-            _cartProducts.value = mutableSetOf(product)
+        } else {
+            _cartProducts.value = mutableSetOf(
+                PurchaseModel(
+                    id = productId,
+                    name = productName,
+                    count = 1,
+                )
+            )
         }
-        Log.d("Cart", _cartProducts.value.toString())
     }
 
     fun logout() {

@@ -8,12 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.inflate
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DefaultItemAnimator
 import com.vladimir_tsurko.drugsstore.App
 import com.vladimir_tsurko.drugsstore.databinding.ActivityMainBinding.inflate
 import com.vladimir_tsurko.drugsstore.databinding.FragmentPurchaseBinding
+import com.vladimir_tsurko.drugsstore.presentation.adapters.ProductListAdapter
+import com.vladimir_tsurko.drugsstore.presentation.adapters.purchaseadapter.PurchaseListAdapter
 import com.vladimir_tsurko.drugsstore.presentation.viewmodels.CatalogViewModel
 import com.vladimir_tsurko.drugsstore.presentation.viewmodels.ViewModelFactory
+import com.vladimir_tsurko.drugsstore.utils.Resource
 import javax.inject.Inject
 
 class PurchaseFragment : Fragment() {
@@ -21,6 +26,8 @@ class PurchaseFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelFactory
 
     private lateinit var viewModel: CatalogViewModel
+
+    private lateinit var adapter: PurchaseListAdapter
 
     private val component by lazy{
         (requireActivity().application as App).component
@@ -33,11 +40,8 @@ class PurchaseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this, viewModelFactory)[CatalogViewModel::class.java]
-        viewModel.productsResponse.observe(viewLifecycleOwner){
-            Log.d("CARTF", it.toString())
-            Log.d("CARTF",it?.data.toString())
-        }
+        viewModel = ViewModelProvider(requireActivity(), viewModelFactory)[CatalogViewModel::class.java]
+        setupRecyclerView()
 
 
     }
@@ -58,6 +62,15 @@ class PurchaseFragment : Fragment() {
     override fun onAttach(context: Context) {
         component.inject(this)
         super.onAttach(context)
+    }
+
+    private fun setupRecyclerView(){
+        adapter = PurchaseListAdapter()
+        binding.rvPurchase.adapter = adapter
+        viewModel.cartProducts.observe(viewLifecycleOwner){
+            adapter.submitList(it?.toList())
+        }
+
     }
 
 
