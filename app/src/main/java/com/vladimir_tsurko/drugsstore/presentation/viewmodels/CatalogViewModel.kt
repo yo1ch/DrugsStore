@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.ProductDto
 import com.vladimir_tsurko.drugsstore.domain.models.CategoryModel
+import com.vladimir_tsurko.drugsstore.domain.models.ProductModel
 import com.vladimir_tsurko.drugsstore.domain.usecases.GetAllCategoriesUseCase
 import com.vladimir_tsurko.drugsstore.domain.usecases.GetAllProductsUseCase
 import com.vladimir_tsurko.drugsstore.domain.usecases.LogoutUseCase
@@ -20,8 +20,8 @@ class CatalogViewModel @Inject constructor(
 ): ViewModel() {
 
 
-    private var _productsResponse = MutableLiveData<Resource<List<ProductDto>>?>()
-    val productsResponse: LiveData<Resource<List<ProductDto>>?>
+    private var _productsResponse = MutableLiveData<Resource<List<ProductModel>>?>()
+    val productsResponse: LiveData<Resource<List<ProductModel>>?>
         get() = _productsResponse
 
     private var _categories = MutableLiveData<Resource<List<CategoryModel>>?>()

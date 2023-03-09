@@ -83,7 +83,6 @@ class CatalogFragment : Fragment() {
                     binding.categories1.setAdapter(arrayAdapter)
                     binding.categories1.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
                         val selectedItem = parent.getItemAtPosition(position).toString()
-                        Toast.makeText(activity,selectedItem,Toast.LENGTH_SHORT).show()
                     }
                 }
                 is Resource.Error -> Toast.makeText(activity, response.message, Toast.LENGTH_SHORT).show()

@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
 import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.ProductDto
 import com.vladimir_tsurko.drugsstore.databinding.ItemProductListBinding
+import com.vladimir_tsurko.drugsstore.domain.models.ProductModel
 
-class ProductListAdapter: ListAdapter<ProductDto, ProductListViewHolder>(CatalogDiffUtilCallback) {
+class ProductListAdapter: ListAdapter<ProductModel, ProductListViewHolder>(CatalogDiffUtilCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductListViewHolder {
         val binding = ItemProductListBinding.inflate(
             LayoutInflater.from(parent.context),

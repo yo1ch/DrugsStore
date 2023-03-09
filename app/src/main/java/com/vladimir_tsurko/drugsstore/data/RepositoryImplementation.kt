@@ -13,6 +13,7 @@ import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.ProductDto
 import com.vladimir_tsurko.drugsstore.domain.Repository
 import com.vladimir_tsurko.drugsstore.domain.models.CategoryModel
 import com.vladimir_tsurko.drugsstore.domain.models.LoginModel
+import com.vladimir_tsurko.drugsstore.domain.models.ProductModel
 import com.vladimir_tsurko.drugsstore.domain.models.RegistrationModel
 import com.vladimir_tsurko.drugsstore.utils.Resource
 
@@ -52,11 +53,11 @@ class RepositoryImplementation @Inject constructor(
         return resultResponse
     }
 
-    override suspend fun getAllProducts(): Resource<List<ProductDto>> {
-        val resultResponse: Resource<List<ProductDto>>
+    override suspend fun getAllProducts(): Resource<List<ProductModel>> {
+        val resultResponse: Resource<List<ProductModel>>
         val response = drugstoreApi.getAllProducts()
         resultResponse = if(response.isSuccessful){
-            Resource.Success(response.body()!!)
+            Resource.Success(productsMapper.mapProductDtoListToModelList(response.body()!!))
         } else {
             val responseError = parseErrorBody(response.errorBody()!!)
             Resource.Error("${responseError?.details}")
