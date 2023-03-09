@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -39,6 +41,7 @@ class CatalogFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[CatalogViewModel::class.java]
         setupOnLogoutButtonClick()
         setupRecyclerView()
+        setupCategories()
 
 
     }
@@ -65,6 +68,16 @@ class CatalogFragment : Fragment() {
         binding.logoutButton.setOnClickListener {
             viewModel.logout()
             findNavController().navigate(R.id.action_global_to_authGraph)
+        }
+    }
+
+    private fun setupCategories(){
+        val categories = arrayOf("Cola", "Boba", "Biba", "Bongo")
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, categories)
+        binding.categories1.setAdapter(arrayAdapter)
+        binding.categories1.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+            val selectedItem = parent.getItemAtPosition(position).toString()
+            Toast.makeText(activity, selectedItem, Toast.LENGTH_SHORT).show()
         }
     }
 
