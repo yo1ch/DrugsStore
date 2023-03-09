@@ -1,7 +1,12 @@
 package com.vladimir_tsurko.drugsstore.presentation.fragments
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,6 +51,7 @@ class RegistrationFragment : Fragment() {
         observeRegistrationResponse()
         setupClickListeners()
         checkLoggedUser()
+        loginSpan()
 
     }
     override fun onCreateView(
@@ -67,6 +73,24 @@ class RegistrationFragment : Fragment() {
         super.onAttach(context)
     }
 
+    private fun loginSpan() {
+        val spannableText = SpannableString("Already have an account? Log in")
+        val clickableSpan = object : ClickableSpan() {
+            override fun onClick(widget: View) {
+                findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
+            }
+
+            override fun updateDrawState(ds: TextPaint) {
+                super.updateDrawState(ds)
+                ds.color = Color.parseColor("#254FE6")
+                ds.isUnderlineText = false
+            }
+        }
+        spannableText.setSpan(clickableSpan, 25, 31, SpannableString.SPAN_EXCLUSIVE_INCLUSIVE)
+        binding.loginText.text = spannableText
+        binding.loginText.movementMethod = LinkMovementMethod.getInstance()
+    }
+
 
     private fun checkLoggedUser(){
         val isUserLogged = viewModel.checkLoggedUser()
@@ -79,9 +103,9 @@ class RegistrationFragment : Fragment() {
     private fun setupClickListeners(){
         binding.registrationButton.setOnClickListener {
             val username = binding.etUsername.text.toString()
-            val password = binding.etPassword.text.toString()
-            val name = binding.etName.text.toString()
-            val surname = binding.etSurname.text.toString()
+            val password = binding.etSignPassword.text.toString()
+            val name = binding.etSignFirstName.text.toString()
+            val surname = binding.etSignSecondName.text.toString()
             viewModel.registrateUser(
                 RegistrationModel(
                     name = name,
@@ -90,9 +114,6 @@ class RegistrationFragment : Fragment() {
                     surname = surname,
                 )
             )
-        }
-        binding.loginButton.setOnClickListener {
-            findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
         }
     }
 
