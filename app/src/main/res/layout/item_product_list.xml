@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="240dp"
+    android:layout_height="wrap_content"
     android:layout_margin="4dp"
     android:layout_marginBottom="10dp"
     app:cardCornerRadius="16dp"
@@ -24,27 +24,44 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/add_to_cart_button"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/button_background"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="Добавить в корзину"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:textColor="@color/black"
             android:fontFamily="@font/montserrat_semibold"
+            android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/add_to_cart_button"
             tools:text="Name" />
 
         <TextView
             android:id="@+id/specification"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_margin="8dp"
             android:ellipsize="end"
+            android:fontFamily="@font/montserrat_medium"
             android:maxLines="3"
             android:text="Specification"
-            android:fontFamily="@font/montserrat_medium"
             android:textColor="@color/light_grey_font"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -62,7 +79,7 @@
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/add_to_cart_button"
             tools:text="Price" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
