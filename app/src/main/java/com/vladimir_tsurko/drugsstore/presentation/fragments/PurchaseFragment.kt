@@ -2,6 +2,7 @@ package com.vladimir_tsurko.drugsstore.presentation.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -33,6 +34,10 @@ class PurchaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory)[CatalogViewModel::class.java]
+        viewModel.productsResponse.observe(viewLifecycleOwner){
+            Log.d("CARTF", it.toString())
+            Log.d("CARTF",it?.data.toString())
+        }
 
 
     }

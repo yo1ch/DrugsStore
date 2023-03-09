@@ -1,5 +1,6 @@
 package com.vladimir_tsurko.drugsstore.presentation.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,7 +20,7 @@ class CatalogViewModel @Inject constructor(
     private val logoutUseCase: LogoutUseCase,
     private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
     private val getProductsByCategoryUseCase: GetProductsByCategoryUseCase,
-): ViewModel() {
+) : ViewModel() {
 
 
     private var _productsResponse = MutableLiveData<Resource<List<ProductModel>>?>()
@@ -28,9 +29,13 @@ class CatalogViewModel @Inject constructor(
 
     private var _categories = MutableLiveData<Resource<List<CategoryModel>>?>()
     val categories: LiveData<Resource<List<CategoryModel>>?>
-    get() = _categories
+        get() = _categories
 
-    init{
+    private var _cartProducts = MutableLiveData<MutableSet<ProductModel>?>()
+    val cartProducts: LiveData<MutableSet<ProductModel>?>
+        get() = _cartProducts
+
+    init {
         getAllCategories()
         getAllProducts()
     }
@@ -44,13 +49,24 @@ class CatalogViewModel @Inject constructor(
         _categories.value = getAllCategoriesUseCase()
     }
 
-    fun getProductsByCategory(selectedCategoryId: Int){
+    fun getProductsByCategory(selectedCategoryId: Int) {
         viewModelScope.launch {
             _productsResponse.value = getProductsByCategoryUseCase(selectedCategoryId)
         }
     }
 
-    fun logout(){
+    fun addToCart(product: ProductModel){
+        if(_cartProducts.value != null ){
+            val cartList = _cartProducts.value
+            cartList?.add(product)
+            _cartProducts.value = cartList
+        } else{
+            _cartProducts.value = mutableSetOf(product)
+        }
+        Log.d("Cart", _cartProducts.value.toString())
+    }
+
+    fun logout() {
         logoutUseCase()
     }
 
