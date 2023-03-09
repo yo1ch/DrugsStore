@@ -3,11 +3,11 @@ package com.vladimir_tsurko.drugsstore.data.remote
 import com.vladimir_tsurko.drugsstore.data.remote.dto.authDto.AuthResponseDto
 import com.vladimir_tsurko.drugsstore.data.remote.dto.authDto.LoginDto
 import com.vladimir_tsurko.drugsstore.data.remote.dto.authDto.RegistrationDto
+import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.CategoriesDtoItem
 import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.ProductDto
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.POST
 
 
@@ -21,6 +21,9 @@ interface DrugstoreApi {
 
     @GET("products")
     suspend fun getAllProducts(): Response<List<ProductDto>>
+
+    @GET("category")
+    suspend fun getAllCategories(): Response<List<CategoriesDtoItem>>
 
 
 }

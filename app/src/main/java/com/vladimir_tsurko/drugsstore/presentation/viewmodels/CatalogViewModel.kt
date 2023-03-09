@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.ProductDto
+import com.vladimir_tsurko.drugsstore.domain.models.CategoryModel
+import com.vladimir_tsurko.drugsstore.domain.usecases.GetAllCategoriesUseCase
 import com.vladimir_tsurko.drugsstore.domain.usecases.GetAllProductsUseCase
 import com.vladimir_tsurko.drugsstore.domain.usecases.LogoutUseCase
 import com.vladimir_tsurko.drugsstore.utils.Resource
@@ -14,6 +16,7 @@ import javax.inject.Inject
 class CatalogViewModel @Inject constructor(
     private val getAllProductsUseCase: GetAllProductsUseCase,
     private val logoutUseCase: LogoutUseCase,
+    private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
 ): ViewModel() {
 
 
@@ -21,13 +24,22 @@ class CatalogViewModel @Inject constructor(
     val productsResponse: LiveData<Resource<List<ProductDto>>?>
         get() = _productsResponse
 
+    private var _categories = MutableLiveData<Resource<List<CategoryModel>>?>()
+    val categories: LiveData<Resource<List<CategoryModel>>?>
+    get() = _categories
+
     init{
+        getAllCategories()
         getAllProducts()
     }
 
 
     private fun getAllProducts() = viewModelScope.launch {
         _productsResponse.value = getAllProductsUseCase()
+    }
+
+    private fun getAllCategories() = viewModelScope.launch {
+        _categories.value = getAllCategoriesUseCase()
     }
 
     fun logout(){

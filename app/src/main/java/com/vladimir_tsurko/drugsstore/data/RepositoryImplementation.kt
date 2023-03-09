@@ -5,11 +5,13 @@ import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.vladimir_tsurko.drugsstore.data.mappers.AuthMapper
+import com.vladimir_tsurko.drugsstore.data.mappers.ProductsMapper
 import com.vladimir_tsurko.drugsstore.data.remote.DrugstoreApi
 import com.vladimir_tsurko.drugsstore.data.remote.dto.ResponseError
 import com.vladimir_tsurko.drugsstore.data.remote.dto.authDto.AuthResponseDto
 import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.ProductDto
 import com.vladimir_tsurko.drugsstore.domain.Repository
+import com.vladimir_tsurko.drugsstore.domain.models.CategoryModel
 import com.vladimir_tsurko.drugsstore.domain.models.LoginModel
 import com.vladimir_tsurko.drugsstore.domain.models.RegistrationModel
 import com.vladimir_tsurko.drugsstore.utils.Resource
@@ -19,12 +21,13 @@ import javax.inject.Inject
 
 class RepositoryImplementation @Inject constructor(
     private val drugstoreApi: DrugstoreApi,
-    private val mapper: AuthMapper,
+    private val authMapper: AuthMapper,
+    private val productsMapper: ProductsMapper,
     private val prefs: SharedPreferences,
 ): Repository {
 
     override suspend fun registerUser(registrationModel: RegistrationModel): Resource<AuthResponseDto> {
-        val response = drugstoreApi.registerUser(mapper.mapRegistrationModelToDto(registrationModel))
+        val response = drugstoreApi.registerUser(authMapper.mapRegistrationModelToDto(registrationModel))
         val resultResponse: Resource<AuthResponseDto>
         if(response.isSuccessful){
             resultResponse = Resource.Success(response.body()!!)
@@ -37,7 +40,7 @@ class RepositoryImplementation @Inject constructor(
     }
 
     override suspend fun login(loginModel: LoginModel): Resource<AuthResponseDto> {
-        val response = drugstoreApi.login(mapper.mapLoginModelToDto(loginModel))
+        val response = drugstoreApi.login(authMapper.mapLoginModelToDto(loginModel))
         val resultResponse: Resource<AuthResponseDto>
         if(response.isSuccessful){
             resultResponse = Resource.Success(response.body()!!)
@@ -54,6 +57,18 @@ class RepositoryImplementation @Inject constructor(
         val response = drugstoreApi.getAllProducts()
         resultResponse = if(response.isSuccessful){
             Resource.Success(response.body()!!)
+        } else {
+            val responseError = parseErrorBody(response.errorBody()!!)
+            Resource.Error("${responseError?.details}")
+        }
+        return resultResponse
+    }
+
+    override suspend fun getAllCategories(): Resource<List<CategoryModel>> {
+        val resultResponse: Resource<List<CategoryModel>>
+        val response = drugstoreApi.getAllCategories()
+        resultResponse = if(response.isSuccessful){
+            Resource.Success(productsMapper.mapCategoriesDtoToModelList(response.body()!!))
         } else {
             val responseError = parseErrorBody(response.errorBody()!!)
             Resource.Error("${responseError?.details}")

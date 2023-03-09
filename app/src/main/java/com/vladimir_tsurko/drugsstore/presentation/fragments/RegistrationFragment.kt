@@ -97,7 +97,6 @@ class RegistrationFragment : Fragment() {
                     findNavController().navigate(R.id.action_registrationFragment_to_main_graph)
                 }
                 is Resource.Error -> Toast.makeText(activity, it.message, Toast.LENGTH_SHORT).show()
-                is Resource.Loading -> {}
                 else -> {}
             }
         }

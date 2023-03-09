@@ -29,12 +29,10 @@ class AuthViewModel @Inject constructor(
         get() = _loginResponse
 
     fun login(loginModel: LoginModel) = viewModelScope.launch {
-        _loginResponse.value = Resource.Loading()
         _loginResponse.value = loginUseCase(loginModel)
     }
 
     fun registrateUser(registrationModel: RegistrationModel) = viewModelScope.launch {
-        _registrationResponse.value = Resource.Loading()
         _registrationResponse.value = registrationUseCase(registrationModel)
 
     }

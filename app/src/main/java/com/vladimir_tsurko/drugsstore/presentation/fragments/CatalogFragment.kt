@@ -72,13 +72,25 @@ class CatalogFragment : Fragment() {
     }
 
     private fun setupCategories(){
-        val categories = arrayOf("Cola", "Boba", "Biba", "Bongo")
-        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, categories)
-        binding.categories1.setAdapter(arrayAdapter)
-        binding.categories1.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
-            val selectedItem = parent.getItemAtPosition(position).toString()
-            Toast.makeText(activity, selectedItem, Toast.LENGTH_SHORT).show()
+        viewModel.categories.observe(viewLifecycleOwner){ response ->
+            when(response){
+                is Resource.Success ->{
+                    val categories = mutableListOf<String>()
+                    response.data?.forEach {
+                        categories.add(it.name)
+                    }
+                    val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, categories)
+                    binding.categories1.setAdapter(arrayAdapter)
+                    binding.categories1.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+                        val selectedItem = parent.getItemAtPosition(position).toString()
+                        Toast.makeText(activity,selectedItem,Toast.LENGTH_SHORT).show()
+                    }
+                }
+                is Resource.Error -> Toast.makeText(activity, response.message, Toast.LENGTH_SHORT).show()
+                else -> {}
+            }
         }
+
     }
 
     private fun setupRecyclerView(){
@@ -90,7 +102,6 @@ class CatalogFragment : Fragment() {
                     adapter.submitList(it.data)
                 }
                 is Resource.Error -> Toast.makeText(activity, it.message, Toast.LENGTH_SHORT).show()
-                is Resource.Loading -> {}
                 else -> {}
             }
         }
