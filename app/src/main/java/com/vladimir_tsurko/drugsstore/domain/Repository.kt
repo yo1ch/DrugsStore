@@ -15,6 +15,8 @@ interface Repository {
 
     suspend fun getAllProducts(): Resource<List<ProductDto>>
 
+    fun logout()
+
     fun checkLoggedUser(): Boolean
 
 }

@@ -6,12 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.ProductDto
 import com.vladimir_tsurko.drugsstore.domain.usecases.GetAllProductsUseCase
+import com.vladimir_tsurko.drugsstore.domain.usecases.LogoutUseCase
 import com.vladimir_tsurko.drugsstore.utils.Resource
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CatalogViewModel @Inject constructor(
-    private val getAllProductsUseCase: GetAllProductsUseCase
+    private val getAllProductsUseCase: GetAllProductsUseCase,
+    private val logoutUseCase: LogoutUseCase,
 ): ViewModel() {
 
 
@@ -26,6 +28,10 @@ class CatalogViewModel @Inject constructor(
 
     private fun getAllProducts() = viewModelScope.launch {
         _productsResponse.value = getAllProductsUseCase()
+    }
+
+    fun logout(){
+        logoutUseCase()
     }
 
 

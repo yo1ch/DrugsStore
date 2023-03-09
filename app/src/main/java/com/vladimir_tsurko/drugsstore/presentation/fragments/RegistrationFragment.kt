@@ -65,7 +65,7 @@ class RegistrationFragment : Fragment() {
     private fun checkLoggedUser(){
         val isUserLogged = viewModel.checkLoggedUser()
         if(isUserLogged){
-            //findNavController().navigate(R.id.action_registrationFragment_to_main_graph)
+            findNavController().navigate(R.id.action_registrationFragment_to_main_graph)
         }
     }
 
@@ -94,7 +94,6 @@ class RegistrationFragment : Fragment() {
         viewModel.registrationResponse.observe(viewLifecycleOwner){
             when(it) {
                 is Resource.Success ->{
-                    Toast.makeText(activity, it.data?.token, Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_registrationFragment_to_main_graph)
                 }
                 is Resource.Error -> Toast.makeText(activity, it.message, Toast.LENGTH_SHORT).show()

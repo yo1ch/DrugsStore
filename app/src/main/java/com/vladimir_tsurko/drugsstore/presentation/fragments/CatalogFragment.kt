@@ -8,8 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.navigation.fragment.findNavController
 import com.vladimir_tsurko.drugsstore.App
+import com.vladimir_tsurko.drugsstore.R
 import com.vladimir_tsurko.drugsstore.databinding.FragmentCatalogBinding
 import com.vladimir_tsurko.drugsstore.presentation.adapters.ProductListAdapter
 import com.vladimir_tsurko.drugsstore.presentation.viewmodels.CatalogViewModel
@@ -36,6 +37,7 @@ class CatalogFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory)[CatalogViewModel::class.java]
+        setupOnLogoutButtonClick()
         setupRecyclerView()
 
 
@@ -57,6 +59,13 @@ class CatalogFragment : Fragment() {
     override fun onAttach(context: Context) {
         component.inject(this)
         super.onAttach(context)
+    }
+
+    private fun setupOnLogoutButtonClick(){
+        binding.logoutButton.setOnClickListener {
+            viewModel.logout()
+            findNavController().navigate(R.id.action_global_to_authGraph)
+        }
     }
 
     private fun setupRecyclerView(){

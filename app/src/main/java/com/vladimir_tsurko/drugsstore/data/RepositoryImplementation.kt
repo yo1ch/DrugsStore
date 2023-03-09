@@ -73,6 +73,10 @@ class RepositoryImplementation @Inject constructor(
 
     }
 
+    override fun logout() {
+        prefs.edit().clear().apply()
+    }
+
 
     private fun parseErrorBody(responseErrorBody: ResponseBody): ResponseError?{
         val gson = Gson()

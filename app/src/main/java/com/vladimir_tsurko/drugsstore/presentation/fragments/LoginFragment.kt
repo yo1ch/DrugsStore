@@ -77,7 +77,6 @@ class LoginFragment : Fragment() {
         viewModel.loginResponse.observe(viewLifecycleOwner){
             when(it) {
                 is Resource.Success ->{
-                    Toast.makeText(activity, it.data?.token, Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_loginFragment_to_main_graph)
                 }
                 is Resource.Error -> Toast.makeText(activity, it.message, Toast.LENGTH_SHORT).show()
