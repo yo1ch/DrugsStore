@@ -8,6 +8,7 @@ import com.vladimir_tsurko.drugsstore.domain.models.CategoryModel
 import com.vladimir_tsurko.drugsstore.domain.models.ProductModel
 import com.vladimir_tsurko.drugsstore.domain.usecases.GetAllCategoriesUseCase
 import com.vladimir_tsurko.drugsstore.domain.usecases.GetAllProductsUseCase
+import com.vladimir_tsurko.drugsstore.domain.usecases.GetProductsByCategoryUseCase
 import com.vladimir_tsurko.drugsstore.domain.usecases.LogoutUseCase
 import com.vladimir_tsurko.drugsstore.utils.Resource
 import kotlinx.coroutines.launch
@@ -17,6 +18,7 @@ class CatalogViewModel @Inject constructor(
     private val getAllProductsUseCase: GetAllProductsUseCase,
     private val logoutUseCase: LogoutUseCase,
     private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
+    private val getProductsByCategoryUseCase: GetProductsByCategoryUseCase,
 ): ViewModel() {
 
 
@@ -40,6 +42,12 @@ class CatalogViewModel @Inject constructor(
 
     private fun getAllCategories() = viewModelScope.launch {
         _categories.value = getAllCategoriesUseCase()
+    }
+
+    fun getProductsByCategory(selectedCategoryId: Int){
+        viewModelScope.launch {
+            _productsResponse.value = getProductsByCategoryUseCase(selectedCategoryId)
+        }
     }
 
     fun logout(){

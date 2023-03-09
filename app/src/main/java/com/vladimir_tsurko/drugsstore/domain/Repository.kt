@@ -7,6 +7,8 @@ import com.vladimir_tsurko.drugsstore.domain.models.LoginModel
 import com.vladimir_tsurko.drugsstore.domain.models.ProductModel
 import com.vladimir_tsurko.drugsstore.domain.models.RegistrationModel
 import com.vladimir_tsurko.drugsstore.utils.Resource
+import retrofit2.Response
+import retrofit2.http.Path
 
 
 interface Repository {
@@ -18,6 +20,8 @@ interface Repository {
     suspend fun getAllProducts(): Resource<List<ProductModel>>
 
     suspend fun getAllCategories(): Resource<List<CategoryModel>>
+
+    suspend fun getProductsByCategory(categoryId: Int): Resource<List<ProductModel>>
 
     fun logout()
 

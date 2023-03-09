@@ -9,7 +9,6 @@ import com.vladimir_tsurko.drugsstore.data.mappers.ProductsMapper
 import com.vladimir_tsurko.drugsstore.data.remote.DrugstoreApi
 import com.vladimir_tsurko.drugsstore.data.remote.dto.ResponseError
 import com.vladimir_tsurko.drugsstore.data.remote.dto.authDto.AuthResponseDto
-import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.ProductDto
 import com.vladimir_tsurko.drugsstore.domain.Repository
 import com.vladimir_tsurko.drugsstore.domain.models.CategoryModel
 import com.vladimir_tsurko.drugsstore.domain.models.LoginModel
@@ -65,6 +64,18 @@ class RepositoryImplementation @Inject constructor(
         return resultResponse
     }
 
+    override suspend fun getProductsByCategory(categoryId: Int): Resource<List<ProductModel>> {
+        val resultResponse: Resource<List<ProductModel>>
+        val response = drugstoreApi.getProductsByCategory(categoryId)
+        resultResponse = if(response.isSuccessful){
+            Resource.Success(productsMapper.mapProductDtoListToModelList(response.body()!!))
+        } else {
+            val responseError = parseErrorBody(response.errorBody()!!)
+            Resource.Error("${responseError?.details}")
+        }
+        return resultResponse
+    }
+
     override suspend fun getAllCategories(): Resource<List<CategoryModel>> {
         val resultResponse: Resource<List<CategoryModel>>
         val response = drugstoreApi.getAllCategories()
@@ -76,6 +87,8 @@ class RepositoryImplementation @Inject constructor(
         }
         return resultResponse
     }
+
+
 
     override fun checkLoggedUser(): Boolean {
         val token = prefs.getString("TOKEN","")

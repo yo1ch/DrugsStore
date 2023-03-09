@@ -9,6 +9,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 
 interface DrugstoreApi {
@@ -24,6 +25,9 @@ interface DrugstoreApi {
 
     @GET("category")
     suspend fun getAllCategories(): Response<List<CategoriesDtoItem>>
+
+    @GET("products/by-category/{id}")
+    suspend fun getProductsByCategory(@Path("id") id: Int):Response<List<ProductDto>>
 
 
 }

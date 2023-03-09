@@ -26,6 +26,6 @@ class ProductListAdapter: ListAdapter<ProductModel, ProductListViewHolder>(Catal
             .into(holder.binding.imageView)
         holder.binding.name.text = product.name
         holder.binding.specification.text = product.specification
-        holder.binding.price.text = product.price.toString()
+        holder.binding.price.text = "${product.price}р"
     }
 }
