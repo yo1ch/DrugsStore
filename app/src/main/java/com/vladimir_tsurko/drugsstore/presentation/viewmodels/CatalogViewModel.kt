@@ -58,7 +58,8 @@ class CatalogViewModel @Inject constructor(
     }
 
     fun addToCart(productId: Int, productName: String) {
-        if (_cartProducts.value != null) {
+        val oldList = _cartProducts.value
+        if ( oldList != null && oldList.filter { it.name == productName }.isEmpty() ) {
             val cartList = _cartProducts.value
             cartList?.add(
                 PurchaseModel(
@@ -77,6 +78,43 @@ class CatalogViewModel @Inject constructor(
                 )
             )
         }
+    }
+
+    fun increaseCount(product: PurchaseModel){
+
+        val oldSet = _cartProducts.value?.map {
+            it.deepCopy()
+        }
+        oldSet?.forEach {
+            if(it.id == product.id){
+                it.count = it.count + 1
+            }
+        }
+        _cartProducts.value = oldSet?.toMutableSet()
+
+
+    }
+
+    fun decreaseCount(product: PurchaseModel){
+        val oldSet = _cartProducts.value?.map {
+            it.deepCopy()
+        }
+        oldSet?.forEach {
+            if(it.id == product.id){
+                if(it.count == 1){
+                    val newSet = oldSet.toMutableList()
+                    newSet.remove(it)
+                    _cartProducts.value = newSet.toMutableSet()
+                } else{
+                    it.count = it.count - 1
+                    _cartProducts.value = oldSet?.toMutableSet()
+                }
+
+            }
+        }
+
+
+
     }
 
     fun logout() {

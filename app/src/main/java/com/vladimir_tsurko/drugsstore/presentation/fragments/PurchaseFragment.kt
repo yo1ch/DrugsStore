@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import com.vladimir_tsurko.drugsstore.App
 import com.vladimir_tsurko.drugsstore.databinding.ActivityMainBinding.inflate
 import com.vladimir_tsurko.drugsstore.databinding.FragmentPurchaseBinding
+import com.vladimir_tsurko.drugsstore.domain.models.PurchaseModel
 import com.vladimir_tsurko.drugsstore.presentation.adapters.ProductListAdapter
 import com.vladimir_tsurko.drugsstore.presentation.adapters.purchaseadapter.PurchaseListAdapter
 import com.vladimir_tsurko.drugsstore.presentation.viewmodels.CatalogViewModel
@@ -42,6 +43,8 @@ class PurchaseFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(requireActivity(), viewModelFactory)[CatalogViewModel::class.java]
         setupRecyclerView()
+        setupAddClick()
+        setupRemoveClick()
 
 
     }
@@ -67,12 +70,28 @@ class PurchaseFragment : Fragment() {
     private fun setupRecyclerView(){
         adapter = PurchaseListAdapter()
         binding.rvPurchase.adapter = adapter
+        val itemAnimator = binding.rvPurchase.itemAnimator
+        if(itemAnimator is DefaultItemAnimator){
+            itemAnimator.supportsChangeAnimations = false
+        }
         viewModel.cartProducts.observe(viewLifecycleOwner){
             adapter.submitList(it?.toList())
         }
 
     }
 
+    private fun setupAddClick(){
+        adapter.onAddClickListener = { product: PurchaseModel ->
+            viewModel.increaseCount(product)
+        }
+    }
 
+    private fun setupRemoveClick(){
+
+        adapter.onRemoveClickListener = { product: PurchaseModel ->
+            viewModel.decreaseCount(product)
+        }
+
+    }
 
 }

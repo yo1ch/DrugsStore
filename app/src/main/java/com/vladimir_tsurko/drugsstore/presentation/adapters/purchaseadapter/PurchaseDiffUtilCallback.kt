@@ -1,7 +1,6 @@
 package com.vladimir_tsurko.drugsstore.presentation.adapters.purchaseadapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.vladimir_tsurko.drugsstore.domain.models.ProductModel
 import com.vladimir_tsurko.drugsstore.domain.models.PurchaseModel
 
 object PurchaseDiffUtilCallback: DiffUtil.ItemCallback<PurchaseModel>() {
