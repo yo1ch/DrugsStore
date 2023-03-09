@@ -61,9 +61,9 @@ class LoginFragment : Fragment() {
     }
 
     private fun setupClickListeners(){
-        binding.button.setOnClickListener{
-            val username = binding.username.text.toString()
-            val password = binding.password.text.toString()
+        binding.loginButton.setOnClickListener{
+            val username = binding.etUsername.text.toString()
+            val password = binding.etPassword.text.toString()
             viewModel.login(
                 LoginModel(
                 username = username,
