@@ -13,6 +13,7 @@ import com.vladimir_tsurko.drugsstore.App
 import com.vladimir_tsurko.drugsstore.R
 import com.vladimir_tsurko.drugsstore.databinding.FragmentRegistrationBinding
 import com.vladimir_tsurko.drugsstore.domain.models.RegistrationModel
+import com.vladimir_tsurko.drugsstore.presentation.MainActivity
 import com.vladimir_tsurko.drugsstore.presentation.viewmodels.AuthViewModel
 import com.vladimir_tsurko.drugsstore.presentation.viewmodels.ViewModelFactory
 import com.vladimir_tsurko.drugsstore.utils.Resource
@@ -33,6 +34,11 @@ class RegistrationFragment : Fragment() {
     private val binding: FragmentRegistrationBinding
         get() = _binding ?: throw RuntimeException("FragmentRegistrationBinding == null")
 
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        (activity as? MainActivity)?.hideBottomBar()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

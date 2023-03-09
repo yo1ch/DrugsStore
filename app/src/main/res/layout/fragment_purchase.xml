@@ -3,8 +3,93 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/light_grey_background"
     android:layout_height="match_parent"
     tools:context=".presentation.fragments.PurchaseFragment">
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/empty_cart_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ваша корзина пуста"
+        android:fontFamily="@font/montserrat_semibold"
+        android:textSize="32sp"
+        android:elevation="1dp"
+        android:textColor="@color/light_grey_font"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar" />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/rv_purchase"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.Toolbar
+
+                android:id="@+id/catalog_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageButton
+                android:id="@+id/back_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
+
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Корзина"
+                android:textColor="@color/black"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/catalog_toolbar"
+                app:layout_constraintEnd_toEndOf="@+id/catalog_toolbar"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/back_button"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/logout_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/toolbar_title"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_logout_24" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -12,20 +97,21 @@
         android:clipToPadding="false"
         android:id="@+id/rv_purchase"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_purchase_list"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/app_bar" />
 
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@drawable/bottom_menu_bg"
+        android:id="@+id/bottom_menu"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="170dp"
         app:layout_constraintBottom_toBottomOf="@+id/rv_purchase"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" >
@@ -33,11 +119,10 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/make_order_button"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_margin="24dp"
             android:background="@drawable/dark_button_background"
             android:fontFamily="@font/montserrat_medium"
-            android:padding="16dp"
             android:text="Оформить заказ"
             android:textAllCaps="false"
             android:textColor="@color/white"
@@ -52,10 +137,11 @@
             android:layout_width="match_parent"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
-            android:fontFamily="@font/montserrat_medium"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="12sp"
             android:hint="Введите адрес доставки"
             android:paddingStart="16dp"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:background="@drawable/et_background"
             app:layout_constraintBottom_toTopOf="@+id/make_order_button"
             app:layout_constraintEnd_toEndOf="parent"

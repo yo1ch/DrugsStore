@@ -21,6 +21,7 @@ import com.vladimir_tsurko.drugsstore.R
 import com.vladimir_tsurko.drugsstore.databinding.FragmentCatalogBinding
 import com.vladimir_tsurko.drugsstore.domain.models.CategoryModel
 import com.vladimir_tsurko.drugsstore.domain.models.ProductModel
+import com.vladimir_tsurko.drugsstore.presentation.MainActivity
 import com.vladimir_tsurko.drugsstore.presentation.adapters.ProductListAdapter
 import com.vladimir_tsurko.drugsstore.presentation.viewmodels.CatalogViewModel
 import com.vladimir_tsurko.drugsstore.presentation.viewmodels.ViewModelFactory
@@ -45,6 +46,10 @@ class CatalogFragment : Fragment() {
     private val binding: FragmentCatalogBinding
         get() = _binding ?: throw RuntimeException("FragmentCatalogBinding == null")
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        (activity as? MainActivity)?.showBottomBar()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -10,8 +10,10 @@ import android.view.View.inflate
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.vladimir_tsurko.drugsstore.App
+import com.vladimir_tsurko.drugsstore.R
 import com.vladimir_tsurko.drugsstore.databinding.ActivityMainBinding.inflate
 import com.vladimir_tsurko.drugsstore.databinding.FragmentPurchaseBinding
 import com.vladimir_tsurko.drugsstore.domain.models.PurchaseModel
@@ -45,6 +47,10 @@ class PurchaseFragment : Fragment() {
         setupRecyclerView()
         setupAddClick()
         setupRemoveClick()
+        setupBackButtonCllick()
+        setupLogoutButtonClick()
+        setupMakeOrderButton()
+        showEmptyPurchaseText()
 
 
     }
@@ -75,6 +81,12 @@ class PurchaseFragment : Fragment() {
             itemAnimator.supportsChangeAnimations = false
         }
         viewModel.cartProducts.observe(viewLifecycleOwner){
+            if(it?.size == 0 || it == null || it.isEmpty()){
+                showEmptyPurchaseText()
+            }else{
+                hideEmptyPurchaseText()
+            }
+
             adapter.submitList(it?.toList())
         }
 
@@ -92,6 +104,37 @@ class PurchaseFragment : Fragment() {
             viewModel.decreaseCount(product)
         }
 
+    }
+
+    private fun setupBackButtonCllick(){
+        binding.backButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
+    }
+
+    private fun setupLogoutButtonClick(){
+        binding.logoutButton.setOnClickListener {
+            viewModel.logout()
+            findNavController().navigate(R.id.action_global_to_authGraph)
+        }
+    }
+
+    private fun setupMakeOrderButton(){
+        binding.makeOrderButton.setOnClickListener {
+            val address = binding.etAdress.text.toString()
+            viewModel.makeOrder(address)
+        }
+
+    }
+
+    private fun showEmptyPurchaseText(){
+        binding.emptyCartText.visibility = View.VISIBLE
+        binding.bottomMenu.visibility = View.GONE
+    }
+
+    private fun hideEmptyPurchaseText(){
+        binding.emptyCartText.visibility = View.GONE
+        binding.bottomMenu.visibility = View.VISIBLE
     }
 
 }

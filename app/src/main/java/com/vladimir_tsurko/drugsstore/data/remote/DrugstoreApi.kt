@@ -5,11 +5,9 @@ import com.vladimir_tsurko.drugsstore.data.remote.dto.authDto.LoginDto
 import com.vladimir_tsurko.drugsstore.data.remote.dto.authDto.RegistrationDto
 import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.CategoriesDtoItem
 import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.ProductDto
+import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.PurchaseDto
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 
 interface DrugstoreApi {
@@ -28,6 +26,12 @@ interface DrugstoreApi {
 
     @GET("products/by-category/{id}")
     suspend fun getProductsByCategory(@Path("id") id: Int):Response<List<ProductDto>>
+
+    @POST("purchases")
+    suspend fun makeOrder(
+        @Body purchaseDto: PurchaseDto,
+        @Header("Authorization") token: String,
+    )
 
 
 }

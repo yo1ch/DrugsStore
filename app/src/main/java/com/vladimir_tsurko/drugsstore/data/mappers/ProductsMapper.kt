@@ -2,8 +2,10 @@ package com.vladimir_tsurko.drugsstore.data.mappers
 
 import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.CategoriesDtoItem
 import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.ProductDto
+import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.PurchaseItemDto
 import com.vladimir_tsurko.drugsstore.domain.models.CategoryModel
 import com.vladimir_tsurko.drugsstore.domain.models.ProductModel
+import com.vladimir_tsurko.drugsstore.domain.models.PurchaseModel
 import javax.inject.Inject
 
 class ProductsMapper @Inject constructor() {
@@ -34,6 +36,13 @@ class ProductsMapper @Inject constructor() {
             )
         }
         return resultList
+    }
+
+    fun mapPurchaseModelToPurchaseItemDto(purchaseModel: PurchaseModel): PurchaseItemDto{
+        return PurchaseItemDto(
+            productId = purchaseModel.id.toString(),
+            count = purchaseModel.count.toString()
+        )
     }
 
 }

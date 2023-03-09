@@ -9,11 +9,9 @@ import com.vladimir_tsurko.drugsstore.data.mappers.ProductsMapper
 import com.vladimir_tsurko.drugsstore.data.remote.DrugstoreApi
 import com.vladimir_tsurko.drugsstore.data.remote.dto.ResponseError
 import com.vladimir_tsurko.drugsstore.data.remote.dto.authDto.AuthResponseDto
+import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.PurchaseDto
 import com.vladimir_tsurko.drugsstore.domain.Repository
-import com.vladimir_tsurko.drugsstore.domain.models.CategoryModel
-import com.vladimir_tsurko.drugsstore.domain.models.LoginModel
-import com.vladimir_tsurko.drugsstore.domain.models.ProductModel
-import com.vladimir_tsurko.drugsstore.domain.models.RegistrationModel
+import com.vladimir_tsurko.drugsstore.domain.models.*
 import com.vladimir_tsurko.drugsstore.utils.Resource
 
 import okhttp3.ResponseBody
@@ -74,6 +72,20 @@ class RepositoryImplementation @Inject constructor(
             Resource.Error("${responseError?.details}")
         }
         return resultResponse
+    }
+
+    override suspend fun makeOrder(purchaseModels: List<PurchaseModel>, address:String) {
+        val purchaseItemDtoList = purchaseModels.map {
+            productsMapper.mapPurchaseModelToPurchaseItemDto(it)
+        }
+        val purchaseDto = PurchaseDto(
+            status = "OPEN",
+            place = address,
+            listItem = purchaseItemDtoList
+        )
+        val token = prefs.getString("TOKEN","")
+        val bearer = "Bearer $token"
+        drugstoreApi.makeOrder(purchaseDto, bearer)
     }
 
     override suspend fun getAllCategories(): Resource<List<CategoryModel>> {
