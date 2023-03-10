@@ -4,14 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.vladimir_tsurko.drugsstore.databinding.ItemPurchaseListBinding
-import com.vladimir_tsurko.drugsstore.domain.models.PurchaseModel
+import com.vladimir_tsurko.drugsstore.domain.models.PurchaseItemModel
 
-class PurchaseListAdapter : ListAdapter<PurchaseModel, PurchaseViewHolder>(PurchaseDiffUtilCallback) {
+class PurchaseListAdapter : ListAdapter<PurchaseItemModel, PurchaseViewHolder>(PurchaseDiffUtilCallback) {
 
 
-    var onAddClickListener: ((PurchaseModel) -> Unit)? = null
+    var onAddClickListener: ((PurchaseItemModel) -> Unit)? = null
 
-    var onRemoveClickListener: ((PurchaseModel) -> Unit)? = null
+    var onRemoveClickListener: ((PurchaseItemModel) -> Unit)? = null
 
 
 

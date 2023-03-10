@@ -1,11 +1,8 @@
 package com.vladimir_tsurko.drugsstore.domain
 
 import com.vladimir_tsurko.drugsstore.data.remote.dto.authDto.AuthResponseDto
-import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.ProductDto
 import com.vladimir_tsurko.drugsstore.domain.models.*
 import com.vladimir_tsurko.drugsstore.utils.Resource
-import retrofit2.Response
-import retrofit2.http.Path
 
 
 interface Repository {
@@ -20,7 +17,9 @@ interface Repository {
 
     suspend fun getProductsByCategory(categoryId: Int): Resource<List<ProductModel>>
 
-    suspend fun makeOrder(purchaseModels: List<PurchaseModel>, address: String)
+    suspend fun makeOrder(purchaseModels: List<PurchaseItemModel>, address: String)
+
+    suspend fun getOrders(): List<OrdersModel>
 
     fun logout()
 

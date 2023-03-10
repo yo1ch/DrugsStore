@@ -4,6 +4,7 @@ import com.vladimir_tsurko.drugsstore.data.remote.dto.authDto.AuthResponseDto
 import com.vladimir_tsurko.drugsstore.data.remote.dto.authDto.LoginDto
 import com.vladimir_tsurko.drugsstore.data.remote.dto.authDto.RegistrationDto
 import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.CategoriesDtoItem
+import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.OrdersDto
 import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.ProductDto
 import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.PurchaseDto
 import retrofit2.Response
@@ -32,6 +33,11 @@ interface DrugstoreApi {
         @Body purchaseDto: PurchaseDto,
         @Header("Authorization") token: String,
     )
+
+    @GET("purchases/find_all_by_current_user")
+    suspend fun getOrders(
+        @Header("Authorization") token: String,
+    ): List<OrdersDto>
 
 
 }

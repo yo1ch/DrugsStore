@@ -74,7 +74,7 @@ class RepositoryImplementation @Inject constructor(
         return resultResponse
     }
 
-    override suspend fun makeOrder(purchaseModels: List<PurchaseModel>, address:String) {
+    override suspend fun makeOrder(purchaseModels: List<PurchaseItemModel>, address:String) {
         val purchaseItemDtoList = purchaseModels.map {
             productsMapper.mapPurchaseModelToPurchaseItemDto(it)
         }
@@ -83,9 +83,14 @@ class RepositoryImplementation @Inject constructor(
             place = address,
             listItem = purchaseItemDtoList
         )
-        val token = prefs.getString("TOKEN","")
-        val bearer = "Bearer $token"
-        drugstoreApi.makeOrder(purchaseDto, bearer)
+        drugstoreApi.makeOrder(purchaseDto, getToken())
+    }
+
+    override suspend fun getOrders(): List<OrdersModel> {
+        val orders = drugstoreApi.getOrders(getToken())
+        return orders.map {
+            productsMapper.mapOrdersDtoToOrdersModel(it)
+        }
     }
 
     override suspend fun getAllCategories(): Resource<List<CategoryModel>> {
@@ -112,6 +117,11 @@ class RepositoryImplementation @Inject constructor(
     private fun saveLoggedUser(token: String, role: String){
         prefs.edit().putString("TOKEN", token).putString("ROLE", role).apply()
 
+    }
+
+    private fun getToken(): String {
+        val token = prefs.getString("TOKEN", "")
+        return "Bearer $token"
     }
 
     override fun logout() {

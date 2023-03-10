@@ -16,4 +16,8 @@
 
     <color name="blue">#4E55D7</color>
 
+
+    <color name="status_open">#5CFA91</color>
+    <color name="status_closed">#FA5C7C</color>
+
 </resources>

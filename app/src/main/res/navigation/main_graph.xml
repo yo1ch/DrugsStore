@@ -21,5 +21,10 @@
         android:name="com.vladimir_tsurko.drugsstore.presentation.fragments.PurchaseFragment"
         android:label="fragment_purchase"
         tools:layout="@layout/fragment_purchase" />
+    <fragment
+        android:id="@+id/ordersFragment"
+        android:name="com.vladimir_tsurko.drugsstore.presentation.fragments.OrdersFragment"
+        android:label="fragment_orders"
+        tools:layout="@layout/fragment_orders" />
 
 </navigation>

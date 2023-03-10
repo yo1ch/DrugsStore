@@ -1,15 +1,13 @@
 package com.vladimir_tsurko.drugsstore.presentation.viewmodels
 
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vladimir_tsurko.drugsstore.data.remote.dto.authDto.AuthResponseDto
 import com.vladimir_tsurko.drugsstore.domain.models.CategoryModel
+import com.vladimir_tsurko.drugsstore.domain.models.OrdersModel
 import com.vladimir_tsurko.drugsstore.domain.models.ProductModel
-import com.vladimir_tsurko.drugsstore.domain.models.PurchaseModel
+import com.vladimir_tsurko.drugsstore.domain.models.PurchaseItemModel
 import com.vladimir_tsurko.drugsstore.domain.usecases.*
 import com.vladimir_tsurko.drugsstore.utils.Resource
 import kotlinx.coroutines.launch
@@ -21,6 +19,7 @@ class CatalogViewModel @Inject constructor(
     private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
     private val getProductsByCategoryUseCase: GetProductsByCategoryUseCase,
     private val makeOrderUseCase: MakeOrderUseCase,
+    private val getOrdersUseCase: GetOrdersUseCase,
 ) : ViewModel() {
 
 
@@ -32,9 +31,13 @@ class CatalogViewModel @Inject constructor(
     val categories: LiveData<Resource<List<CategoryModel>>?>
         get() = _categories
 
-    private var _cartProducts = MutableLiveData<MutableSet<PurchaseModel>?>()
-    val cartProducts: LiveData<MutableSet<PurchaseModel>?>
+    private var _cartProducts = MutableLiveData<MutableSet<PurchaseItemModel>?>()
+    val cartProducts: LiveData<MutableSet<PurchaseItemModel>?>
         get() = _cartProducts
+
+    private var _orders = MutableLiveData<List<OrdersModel>?>()
+    val orders: LiveData<List<OrdersModel>?>
+        get() = _orders
 
 
     init {
@@ -42,6 +45,10 @@ class CatalogViewModel @Inject constructor(
         getAllProducts()
     }
 
+
+    fun getOrders() = viewModelScope.launch{
+        _orders.value = getOrdersUseCase()
+    }
 
     private fun getAllProducts() = viewModelScope.launch {
         _productsResponse.value = getAllProductsUseCase()
@@ -70,7 +77,7 @@ class CatalogViewModel @Inject constructor(
         if (oldList != null && oldList.filter { it.name == productName }.isEmpty()) {
             val cartList = _cartProducts.value
             cartList?.add(
-                PurchaseModel(
+                PurchaseItemModel(
                     id = productId,
                     name = productName,
                     count = 1,
@@ -79,7 +86,7 @@ class CatalogViewModel @Inject constructor(
             _cartProducts.value = cartList
         } else {
             _cartProducts.value = mutableSetOf(
-                PurchaseModel(
+                PurchaseItemModel(
                     id = productId,
                     name = productName,
                     count = 1,
@@ -88,7 +95,7 @@ class CatalogViewModel @Inject constructor(
         }
     }
 
-    fun increaseCount(product: PurchaseModel) {
+    fun increaseCount(product: PurchaseItemModel) {
 
         val oldSet = _cartProducts.value?.map {
             it.deepCopy()
@@ -103,7 +110,7 @@ class CatalogViewModel @Inject constructor(
 
     }
 
-    fun decreaseCount(product: PurchaseModel) {
+    fun decreaseCount(product: PurchaseItemModel) {
         val oldSet = _cartProducts.value?.map {
             it.deepCopy()
         }

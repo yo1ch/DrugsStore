@@ -1,11 +1,13 @@
 package com.vladimir_tsurko.drugsstore.data.mappers
 
 import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.CategoriesDtoItem
+import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.OrdersDto
 import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.ProductDto
 import com.vladimir_tsurko.drugsstore.data.remote.dto.productDto.PurchaseItemDto
 import com.vladimir_tsurko.drugsstore.domain.models.CategoryModel
+import com.vladimir_tsurko.drugsstore.domain.models.OrdersModel
 import com.vladimir_tsurko.drugsstore.domain.models.ProductModel
-import com.vladimir_tsurko.drugsstore.domain.models.PurchaseModel
+import com.vladimir_tsurko.drugsstore.domain.models.PurchaseItemModel
 import javax.inject.Inject
 
 class ProductsMapper @Inject constructor() {
@@ -38,10 +40,19 @@ class ProductsMapper @Inject constructor() {
         return resultList
     }
 
-    fun mapPurchaseModelToPurchaseItemDto(purchaseModel: PurchaseModel): PurchaseItemDto{
+    fun mapPurchaseModelToPurchaseItemDto(purchaseModel: PurchaseItemModel): PurchaseItemDto{
         return PurchaseItemDto(
             productId = purchaseModel.id.toString(),
             count = purchaseModel.count.toString()
+        )
+    }
+
+    fun mapOrdersDtoToOrdersModel(ordersDto: OrdersDto): OrdersModel {
+        return OrdersModel(
+            id = ordersDto.id,
+            place = ordersDto.place,
+            userId = ordersDto.userId,
+            status = ordersDto.status
         )
     }
 

@@ -2,26 +2,20 @@ package com.vladimir_tsurko.drugsstore.presentation.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.inflate
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.vladimir_tsurko.drugsstore.App
 import com.vladimir_tsurko.drugsstore.R
-import com.vladimir_tsurko.drugsstore.databinding.ActivityMainBinding.inflate
 import com.vladimir_tsurko.drugsstore.databinding.FragmentPurchaseBinding
-import com.vladimir_tsurko.drugsstore.domain.models.PurchaseModel
-import com.vladimir_tsurko.drugsstore.presentation.adapters.ProductListAdapter
+import com.vladimir_tsurko.drugsstore.domain.models.PurchaseItemModel
 import com.vladimir_tsurko.drugsstore.presentation.adapters.purchaseadapter.PurchaseListAdapter
 import com.vladimir_tsurko.drugsstore.presentation.viewmodels.CatalogViewModel
 import com.vladimir_tsurko.drugsstore.presentation.viewmodels.ViewModelFactory
-import com.vladimir_tsurko.drugsstore.utils.Resource
 import javax.inject.Inject
 
 class PurchaseFragment : Fragment() {
@@ -93,14 +87,14 @@ class PurchaseFragment : Fragment() {
     }
 
     private fun setupAddClick(){
-        adapter.onAddClickListener = { product: PurchaseModel ->
+        adapter.onAddClickListener = { product: PurchaseItemModel ->
             viewModel.increaseCount(product)
         }
     }
 
     private fun setupRemoveClick(){
 
-        adapter.onRemoveClickListener = { product: PurchaseModel ->
+        adapter.onRemoveClickListener = { product: PurchaseItemModel ->
             viewModel.decreaseCount(product)
         }
 

@@ -9,15 +9,14 @@ import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
 import com.vladimir_tsurko.drugsstore.databinding.ItemProductListBinding
 import com.vladimir_tsurko.drugsstore.domain.models.ProductModel
-import com.vladimir_tsurko.drugsstore.domain.models.PurchaseModel
-import kotlinx.android.synthetic.main.item_product_list.view.*
+import com.vladimir_tsurko.drugsstore.domain.models.PurchaseItemModel
 
 class ProductListAdapter: ListAdapter<ProductModel, ProductListViewHolder>(CatalogDiffUtilCallback) {
 
 
     var onButtonClickListener: ((View, ProductModel) -> Unit)? = null
 
-    var cartProducts = listOf<PurchaseModel>()
+    var cartProducts = listOf<PurchaseItemModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductListViewHolder {
         val binding = ItemProductListBinding.inflate(
