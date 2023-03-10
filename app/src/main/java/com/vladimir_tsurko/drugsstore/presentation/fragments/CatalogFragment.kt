@@ -133,6 +133,11 @@ class CatalogFragment : Fragment() {
                 else -> {}
             }
         }
+        viewModel.cartProducts.observe(viewLifecycleOwner){
+            if (it != null) {
+                adapter.cartProducts = it.toList()
+            }
+        }
 
     }
 

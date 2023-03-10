@@ -13,6 +13,8 @@ class PurchaseListAdapter : ListAdapter<PurchaseModel, PurchaseViewHolder>(Purch
 
     var onRemoveClickListener: ((PurchaseModel) -> Unit)? = null
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PurchaseViewHolder {
         val binding = ItemPurchaseListBinding.inflate(
             LayoutInflater.from(parent.context),
